@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% block title %} Home {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="starter-template">
+            <h3>Show data</h3>
+            <button class="btn btn-success"
+                    data-toggle="modal" data-target="#myModal">Add Data</button>
+            <br/>
+            <br/>
+            <div class="page-header">
+                <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>name</td>
+                        <td>action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in computers %}
+                        <tr>
+                            <td>{{ row.0 }}</td>
+                            <td>{{ row.1 }}</td>
+                            <td>
+                                <a href="#!" class="btn btn-primary"
+                                data-toggle="modal" data-target="#myModal2{{row.0}}">Update</a>
+                                <a href="/destroy/{{row.0}}"
+                                   onclick="return confirm('sure delete this data')"
+                                   class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {% include 'includes/modal-update.html'%}
+                    {% else %}
+                    <tr>
+                        <td colspan="2">No entries here so far</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>id</td>
+                        <td>name</td>
+                        <td>action</td>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <!--include modal insert-->
+    {%include 'includes/modal-insert.html'%}
+    <!--include modal insert-->
+
+{% endblock %}
